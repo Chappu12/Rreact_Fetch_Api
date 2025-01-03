@@ -10,10 +10,10 @@ const Nasa = () => {
     }, []);
 
     return (
-        <div className='flex '>
+        <div className='flex w-screen bg-gray-600 overflow-x-hidden'>
             {mars.photos.map((item) => (
-                <div className='m-2 p-4 flex bg-black w-20 '>
-                    <p key={item.id} className="text-sky-400">{item.id}</p> 
+                <div className='m-2 p-4 flex bg-black w-20 text-sky-400'>
+                    <p key={item.id}>{item.id}</p> 
                 </div>
             ))}
         </div>

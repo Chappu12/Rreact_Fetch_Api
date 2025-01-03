@@ -5,20 +5,24 @@ const Nasa = () => {
 
     useEffect(() => {
         fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY")
-            .then((response) => response.json()) 
-            .then((data) => setMars(data)); 
+            .then((response) => response.json())
+            .then((data) => {
+                if (data && data.photos) {
+                    setMars(data); // Ensure data structure matches
+                }
+            })
+            .catch((error) => console.error("Error fetching data:", error));
     }, []);
 
     return (
-        <>
-            <div className='flex w-screen bg-gray-600 overflow-x-hidden'>
-                {mars.photos.map((item) => (
-                    <div className='m-2 p-4 flex bg-black w-20 text-sky-400'>
-                        <p key={item.id}>{item.id}</p>
-                    </div>
-                ))}
-            </div>
-        </>
+        <div className="flex w-screen bg-gray-600 overflow-x-hidden flex-wrap">
+            {mars.photos.map((item) => (
+                <div className="m-2 p-4 flex bg-black w-40 text-sky-400" 
+                    key={item.id}>
+                    <p>{item.id}</p>
+                </div>
+            ))}
+        </div>
     );
 };
 
